@@ -112,7 +112,7 @@ function Stopwatch() {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
         setElapsedTime(Date.now() - startTimeRef.current);
-      }, 1000);
+      }, 10);
     }
     return () => {
       clearInterval(intervalRef.current);
