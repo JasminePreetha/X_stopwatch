@@ -9,19 +9,21 @@ function Stopwatch() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
-  useEffect(() => {
-    useEffect(() => {
-        let intervalId;
-        if (isRunning) {
-          intervalId = setInterval(() => {
-            setTime(time => time + 1); // Update the time state correctly
-          }, 1000);
-        } else {
-          clearInterval(intervalId); // Clear the interval when isRunning is false
-        }
-        return () => clearInterval(intervalId); // Clean up the interval on unmount
-      }, [isRunning]);
-
+  useEffect(function() {
+    let intervalId;
+    if (isRunning) {
+      intervalId = setInterval(function() {
+        setTime(function(time) {
+          return time + 1;
+        });
+      }, 1000);
+    } else {
+      clearInterval(intervalId); // Clear the interval when isRunning is false
+    }
+    return function() {
+      clearInterval(intervalId); // Clean up the interval on unmount
+    };
+  }, [isRunning]);
   const handleStart = () => {
     setIsRunning(true);
   };
