@@ -9,21 +9,22 @@ function Stopwatch() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
-  useEffect(function() {
-    let intervalId;
+  useEffect(() => {
+    let intervalId = null;
+
     if (isRunning) {
-      intervalId = setInterval(function() {
-        setTime(function(time) {
-          return time + 1;
-        });
+      intervalId = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
       }, 1000);
-    } else {
-      clearInterval(intervalId); // Clear the interval when isRunning is false
     }
-    return function() {
-      clearInterval(intervalId); // Clean up the interval on unmount
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
     };
   }, [isRunning]);
+
   const handleStart = () => {
     setIsRunning(true);
   };
