@@ -1,7 +1,7 @@
-import StopWatch from "./stopwatch.jsx"
+import Stopwatch from "./stopwatch.jsx"
 function App() {
   return (
-    <StopWatch/>
+    <Stopwatch/>
     );
 }
 
